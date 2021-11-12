@@ -3,19 +3,33 @@
 using namespace std;
 
 
+void functionWithOutParam(/*const*/int& reference)
+{
+	reference = 12;
+}
+
+void functionWithOptionalOutputParam(int* optional = nullptr)
+{}
+
 int main()
 {
-	const int a = 12;
-	const int b = 13;
+	int a = 12;
+	int b = 3;
 
-	const int* p1 = &a;
-	p1 = &b;
-	//*p1 = 3;
+	int* p = &a;
+	int& r = a;
 
-	const int* const p2 = &a;
-	//*p2 = 3;
-	//p2 = &b;
+	int* np = nullptr;
+	//int& nr = 10;
 
-	int x, y;
-	int* px, *py, normalNonPointerInt;
+	int*& referenceToPointer = p;
+
+	const int& cr = 10;
+
+	r = b;
+	cout << a << r << '\n';
+	a = 100;
+	cout << a << r << '\n';
+	functionWithOutParam(a);
+	cout << a << r << '\n';
 }
