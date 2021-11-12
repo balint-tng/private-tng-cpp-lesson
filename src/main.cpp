@@ -76,6 +76,17 @@ void f(Array array)
 	cout << array.getArrayElement(2) << '\n';
 }
 
+Array makeArray()
+{
+	Array someArray(3);
+	return someArray;
+}
+
+void takeArray(Array array)
+{
+	// Does something
+}
+
 int main()
 {
 	try
@@ -89,6 +100,8 @@ int main()
 		//cin.get();
 		Array array2(4);
 		array = array2;
+
+		takeArray(move(array));
 	}
 	catch (const exception& e)
 	{
