@@ -2,23 +2,20 @@
 
 using namespace std;
 
-void f1(int i)
-{
-	cout << "f1: " << i << '\n';
-}
-
-void f2(int i)
-{
-	cout << "f2: " << i * i << '\n';
-}
-
-void sort(int* array, unsigned long sizeOfArray, bool (*comperator)(int, int))
-{}
 
 int main()
 {
-	void (*nameOfPointerToFunction)(int) = f1;
-	nameOfPointerToFunction(3);
-	nameOfPointerToFunction = f2;
-	nameOfPointerToFunction(3);
+	const int a = 12;
+	const int b = 13;
+
+	const int* p1 = &a;
+	p1 = &b;
+	//*p1 = 3;
+
+	const int* const p2 = &a;
+	//*p2 = 3;
+	//p2 = &b;
+
+	int x, y;
+	int* px, *py, normalNonPointerInt;
 }
