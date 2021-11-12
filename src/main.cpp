@@ -25,6 +25,10 @@ int main()
 	int*& referenceToPointer = p;
 
 	const int& cr = 10;
+	const int& constRefToNonConst = a;
+	a = 3;
+	//constRefToNonConst = 4;
+	//functionWithOutParam(constRefToNonConst);
 
 	r = b;
 	cout << a << r << '\n';
