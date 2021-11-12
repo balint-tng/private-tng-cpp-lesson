@@ -1,39 +1,19 @@
-#include <iostream>
-
-using namespace std;
-
-
-void functionWithOutParam(/*const*/int& reference)
-{
-	reference = 12;
-}
-
-void functionWithOptionalOutputParam(int* optional = nullptr)
-{}
+#include <cstdio>
+#include <cstdlib>
 
 int main()
 {
-	int a = 12;
-	int b = 3;
+	if (int* pointerToHeap = (int*)malloc(sizeof(int)))
+	{
+		*pointerToHeap = 12;
+		printf("%d", *pointerToHeap);
+		free(pointerToHeap);
+	}
 
-	int* p = &a;
-	int& r = a;
-
-	int* np = nullptr;
-	//int& nr = 10;
-
-	int*& referenceToPointer = p;
-
-	const int& cr = 10;
-	const int& constRefToNonConst = a;
-	a = 3;
-	//constRefToNonConst = 4;
-	//functionWithOutParam(constRefToNonConst);
-
-	r = b;
-	cout << a << r << '\n';
-	a = 100;
-	cout << a << r << '\n';
-	functionWithOutParam(a);
-	cout << a << r << '\n';
+	int* arrayOfFive = (int*)malloc(5 * sizeof(int));
+	printf("Allocated at: %p", arrayOfFive);
+	arrayOfFive[0] = 1;
+	arrayOfFive[1] = 2;
+	//arrayOfFive[5] = 213;	// DANGEROUS! INVALID! (OUT OF BOUNDS)
+	free(arrayOfFive);
 }
