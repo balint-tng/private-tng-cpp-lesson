@@ -22,6 +22,16 @@ struct Struct
 	int x;
 };
 
+/*struct Event
+{
+	int eventType;
+	union
+	{
+		MouseEvent mouseEvent;
+		WindowEvent windowEvent;
+	};
+};*/
+
 int main()
 {
 	Class object1;
