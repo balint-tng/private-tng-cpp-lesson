@@ -3,17 +3,40 @@
 
 using namespace std;
 
+class Class
+{
+public:
+	int x;
+	int y;
+	int z;
+
+	void method()
+	{}
+
+private:
+	int privateVariable;
+};
+
+struct Struct
+{
+	int x;
+};
+
 int main()
 {
-	int* pointerToHeap = new int(5);
-	cout << *pointerToHeap << '\n';
-	delete pointerToHeap;
+	Class object1;
+	object1.x;
+	object1.method();
 
-	int* pointerToArray = new int[10]{ 2, 3, 4 };
-	cout << pointerToArray[0] << pointerToArray[1] << pointerToArray[8] << '\n';
-	delete[] pointerToArray;
+	Class* objectOnHeap = new Class();
+	objectOnHeap->method();
+	objectOnHeap->x;
+	(*objectOnHeap).x;
+	*objectOnHeap = object1;
+	delete objectOnHeap;	// Maybe also set it to null after?
 
-	/*int** pointerToArrayOfArray = new int* [5];
-	for (int i = 0; i < 5; ++i)
-		pointerToArrayOfArray[i] = new int[10];*/
+	*objectOnHeap = *(new Class());	// MEMORY LEAK!
+	delete objectOnHeap;	// DOUBLE FREE!
+
+	Struct object2;
 }
