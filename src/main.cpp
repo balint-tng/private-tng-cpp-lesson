@@ -3,50 +3,55 @@
 
 using namespace std;
 
-class Class
+struct Position
 {
-public:
 	int x;
 	int y;
-	int z;
+};
 
-	void method()
-	{}
+class BigAssObject
+{
+public:
+	int someConstFunction() const { return 0; }
+	int someNonConstFunction() { return 0; }
+};
+
+class GameObject
+{
+public:
+	void setPosition(Position position) /*const*/ { myPosition = position; }
+	Position getPosition() const { return myPosition; }
+
+	void setBAO(BigAssObject bao) { myBAO = bao; /*Should use move!*/ }
+	const BigAssObject& getBAO() const { return myBAO; }
+	BigAssObject& getBAO() { return myBAO; }
 
 private:
-	int privateVariable;
+	Position myPosition;
+	BigAssObject myBAO;
 };
 
-struct Struct
+void certainPartOfTheCode(const GameObject& object)
 {
-	int x;
-};
+	object.getBAO().someConstFunction();
+}
 
-/*struct Event
+void otherPlace(GameObject& object)
 {
-	int eventType;
-	union
-	{
-		MouseEvent mouseEvent;
-		WindowEvent windowEvent;
-	};
-};*/
+	object.getBAO().someNonConstFunction();
+}
 
 int main()
 {
-	Class object1;
-	object1.x;
-	object1.method();
+	Position p;
+	p.x = 1;
+	p.y = 2;
 
-	Class* objectOnHeap = new Class();
-	objectOnHeap->method();
-	objectOnHeap->x;
-	(*objectOnHeap).x;
-	*objectOnHeap = object1;
-	delete objectOnHeap;	// Maybe also set it to null after?
+	const GameObject object;
+	//object.setPosition(p);
+	//object.setPosition({ 1, 2 });
+	Position p2 = object.getPosition();
 
-	*objectOnHeap = *(new Class());	// MEMORY LEAK!
-	delete objectOnHeap;	// DOUBLE FREE!
-
-	Struct object2;
+	const GameObject& refToObject = object;
+	//refToObject.setPosition({ 1, 2 });
 }
